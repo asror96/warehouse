@@ -28,7 +28,7 @@ WORKDIR /var/www
 # Установка прав на директории storage и bootstrap/cache
 RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
     chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && \
-    chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+    chmod -R 777 /var/www/storage /var/www/bootstrap/cache
 
 # Открытие порта для php-fpm
 EXPOSE 9000
