@@ -12,12 +12,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Create project directory
+        run: |
+          mkdir -p /var/www/warehouse
+
+      - name: Copy code to project directory
+        run: |
+          rsync -av --delete . /var/www/warehouse
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: /var/www/warehouse/vendor
+          key: composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            composer-
+
       - name: Install dependencies
         run: |
           cd /var/www/warehouse
-          composer install --no-dev --optimize-autoloader
+          composer install --no-dev --optimize-autoloader || exit 1
+
+      - name: Run migrations (if needed)
+        run: |
+          cd /var/www/warehouse
+          php artisan migrate --force || exit 1
 
       - name: Restart services
         run: |
-          docker compose down
-          docker compose up -d --build
+          cd /var/www/warehouse
+          docker compose down || exit 1
+          docker compose up -d --build || exit 1
