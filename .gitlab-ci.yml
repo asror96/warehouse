@@ -27,4 +27,14 @@ print_third:
     - build
   only:
     - develop
-  script: echo "hello world third!"
+  script:
+    - echo $APP_NAME
+    - echo $APP_ENV
+    - echo $APP_KEY
+    - echo $APP_DEBUG
+    - echo $APP_URL
+    - echo $DB_CONNECTION
+    - echo $DB_HOST
+    - echo $DB_PORT
+    - echo $DB_DATABASE
+    - echo $DB_USERNAME
