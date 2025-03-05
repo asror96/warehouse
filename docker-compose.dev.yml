@@ -35,7 +35,7 @@ services:
     image: mysql:8.0
     restart: always
     volumes:
-        - ./tmp/db:/var/lib/mysql
+        - /var/lib/mysql:/var/lib/mysql
     environment:
         MYSQL_DATABASE: $DB_DATABASE
         MYSQL_ROOT_PASSWORD: $DB_PASSWORD
