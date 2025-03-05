@@ -19,6 +19,7 @@ print_second:
     - develop
   script: echo "hello world second!"
 
+
 print_third:
   stage: third
   tags:
