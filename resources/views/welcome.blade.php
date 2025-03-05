@@ -6,6 +6,6 @@
     <title>asror.online</title>
 </head>
 <body>
-Asror website
+Asror Tukhtamishov website
 </body>
 </html>
