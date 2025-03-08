@@ -40,7 +40,7 @@
                     <td>{{ number_format($item->price, 2) }}</td>
                     <td>
                         <!-- Кнопка для открытия модального окна -->
-                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createRequestModal" data-item-id="{{ $item->id }}" data-item-name="{{ $item->name }}" data-item-price="{{ $item->price }}">
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createRequestModal" data-item-id="{{ $item->id }}" data-item-name="{{ $item->name }}" data-item-price="{{ $item->price }}" data-item-description="{{ $item->description }}">
                             <i class="fas fa-edit"></i> Создать заявку
                         </button>
                         <a href="{{ route('items.show', $item) }}" class="btn btn-sm btn-secondary">
@@ -51,7 +51,8 @@
                             <i class="fas fa-edit"></i> Редактировать
                         </a>
                         <form action="{{ route('items.destroy', $item->id) }}" method="POST" style="display:inline;">
-                            @method('DELETE')
+                            @csrf
+                            @method('DELETE') <!-- Указываем метод DELETE -->
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Вы уверены?')">
                                 <i class="fas fa-trash"></i> Удалить
                             </button>
@@ -68,9 +69,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createRequestModal" data-item-id="{{ $item->id }}" data-item-name="{{ $item->name }}" data-item-price="{{ $item->price }}" data-item-description="{{ $item->description }}">
-                        <i class="fas fa-edit"></i> Создать заявку
-                    </button>
+                    <h5 class="modal-title" id="createRequestModalLabel">Создать заявку</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="createRequestForm" action="{{ route('requests.store') }}" method="POST">
@@ -129,5 +129,3 @@
         });
     });
 </script>
-
-
