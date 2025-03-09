@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Models;
 
 use App\Enums\RequestStatus;
@@ -7,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Request extends Model
+final class Request extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -16,7 +18,7 @@ class Request extends Model
         'total_price',
         'item_id',
         'description',
-        'crated_at'
+        'crated_at',
     ];
 
     protected $casts = [

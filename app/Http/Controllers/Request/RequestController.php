@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+declare(strict_types = 1);
 
+namespace App\Http\Controllers\Request;
 
-
+use App\Http\Controllers\BaseController\Controller;
 use App\Models\Request;
 
-class RequestController extends Controller
+final class RequestController extends Controller
 {
     public function __invoke()
     {
         $requests = Request::all();
+
         return view('layout.requests.index')->with(compact('requests'));
     }
 }

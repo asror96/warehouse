@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Controllers\ItemCreateController;
-use App\Http\Controllers\ItemDestroyController;
-use App\Http\Controllers\ItemEditController;
-use App\Http\Controllers\ItemListController;
-use App\Http\Controllers\ItemStoreController;
-use App\Http\Controllers\ItemUpdateController;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\RequestController;
-use App\Http\Controllers\RequestDestroyController;
-use App\Http\Controllers\RequestEditController;
-use App\Http\Controllers\RequestStoreController;
-use App\Http\Controllers\RequestUpdateController;
-use App\Http\Controllers\ShowItemController;
-use App\Http\Controllers\ShowRequestController;
+use App\Http\Controllers\Item\ItemCreateController;
+use App\Http\Controllers\Item\ItemDestroyController;
+use App\Http\Controllers\Item\ItemEditController;
+use App\Http\Controllers\Item\ItemListController;
+use App\Http\Controllers\Item\ItemStoreController;
+use App\Http\Controllers\Item\ItemUpdateController;
+use App\Http\Controllers\Item\ShowItemController;
+use App\Http\Controllers\Main\MainController;
+use App\Http\Controllers\Request\RequestController;
+use App\Http\Controllers\Request\RequestDestroyController;
+use App\Http\Controllers\Request\RequestEditController;
+use App\Http\Controllers\Request\RequestStoreController;
+use App\Http\Controllers\Request\RequestUpdateController;
+use App\Http\Controllers\Request\ShowRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,22 +27,25 @@ use Illuminate\Support\Facades\Route;
 |ItemCreateController
 */
 //Main
-Route::get('/', MainController::class)->name('main');
+Route::get(uri: '/', action: MainController::class)->name(name: 'main');
 
 //Item
-Route::get('/items', ItemListController::class)->name('items.list');
-Route::get('/items/create', ItemCreateController::class)->name('items.create');
-Route::post('/items', ItemStoreController::class)->name('items.store');
-Route::get('/items/{item}/edit', ItemEditController::class )->name('items.edit');
-Route::put('/items/{item}', ItemUpdateController::class)->name('items.update');
-Route::delete('/items/{item}', ItemDestroyController::class)->name('items.destroy');
-Route::get('/items/{id}', ShowItemController::class)->name('items.show');
+Route::prefix('/items')->group(function () {
+    Route::get(uri: '/', action: ItemListController::class)->name(name: 'items.list');
+    Route::get(uri: '/{id}', action: ShowItemController::class)->name(name: 'items.show');
+    Route::get(uri: '/create', action: ItemCreateController::class)->name(name: 'items.create');
+    Route::post(uri: '/', action: ItemStoreController::class)->name(name: 'items.store');
+    Route::get(uri: '/{item}/edit', action: ItemEditController::class)->name(name: 'items.edit');
+    Route::put(uri: '/{item}', action: ItemUpdateController::class)->name(name: 'items.update');
+    Route::delete(uri: '/{item}', action: ItemDestroyController::class)->name(name: 'items.destroy');
+});
 
 //request
-Route::post('/requests', RequestStoreController::class)->name('requests.store');
-Route::get('/requests', RequestStoreController::class)->name('requests.show');
-Route::get('/requests/{request}/edit', RequestEditController::class)->name('requests.edit');
-Route::put('/requests/{request}', RequestUpdateController::class)->name('requests.update');
-Route::get('/requests', RequestController::class)->name('requests.list');
-Route::get('/requests/{id}', ShowRequestController::class)->name('requests.show');
-Route::delete('/request/{request}',RequestDestroyController::class)->name('requests.destroy');
+Route::prefix('/requests')->group(function () {
+    Route::get(uri: '/', action: RequestController::class)->name(name: 'requests.list');
+    Route::get(uri: '/{id}', action: ShowRequestController::class)->name(name: 'requests.show');
+    Route::post(uri: '/', action: RequestStoreController::class)->name(name: 'requests.store');
+    Route::get(uri: '/{request}/edit', action: RequestEditController::class)->name(name: 'requests.edit');
+    Route::put(uri: '/{request}', action: RequestUpdateController::class)->name(name: 'requests.update');
+    Route::delete(uri: '/{request}', action: RequestDestroyController::class)->name(name: 'requests.destroy');
+});
