@@ -35,7 +35,7 @@ final class RequestService
     {
         $items = Item::all();
 
-        return view('layout.requests.edit', compact(var_name: 'request', var_names: 'items'));
+        return view('layout.requests.edit', compact( 'request',  'items'));
     }
 
     public function update(RequestUpdateRequest $httpRequest, Request $request): RedirectResponse

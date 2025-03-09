@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Информация о заявке</h5>
-                <p><strong>ФИО покупателя:</strong> {{ $request->customer_name }}</p>
+                <p class="mt-3"><strong>ФИО покупателя:</strong> {{ $request->customer_name }}</p>
                 <p><strong>Статус: </strong>{{$request->status->label()}}
                 </p>
                 <p><strong>Итоговая цена:</strong> {{ number_format($request->total_price, 2) }} ₽</p>
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <a href="{{ route('requests.list') }}" class="btn btn-secondary mt-3">Назад</a>
+        <a href="{{ route('requests.list') }}" class="btn btn-primary mt-3">Назад</a>
     </div>
 @endsection
 

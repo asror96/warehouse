@@ -26,7 +26,7 @@ final class ItemService
     {
         $categories = Category::all();
 
-        return view('layout.items.create', compact(var_name: 'categories'));
+        return view('layout.items.create', compact( 'categories'));
     }
 
     public function store(ItemStoreRequest $request): RedirectResponse
@@ -41,7 +41,7 @@ final class ItemService
     {
         $categories = Category::all();
 
-        return view('layout.items.edit', compact(var_name: 'item', var_names: 'categories'));
+        return view('layout.items.edit', compact( 'item', 'categories'));
     }
 
     public function update(ItemUpdateRequest $request, Item $item): RedirectResponse
@@ -63,6 +63,6 @@ final class ItemService
     {
         $item = Item::query()->findOrFail($id);
 
-        return view('layout.items.show', compact(var_name: 'item'));
+        return view('layout.items.show', compact('item'));
     }
 }

@@ -14,7 +14,7 @@
                 <h4>Цена: {{ number_format($item->price, 2) }} ₽</h4>
 
                 <!-- Если нужно, добавьте кнопку для добавления в корзину -->
-                <a href="{{ route('items.list') }}" class="btn btn-primary">Назад</a>
+                <a href="{{ route('items.list') }}" class="btn btn-primary mt-3">Назад</a>
             </div>
         </div>
 
