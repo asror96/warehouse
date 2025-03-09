@@ -27,25 +27,22 @@ use Illuminate\Support\Facades\Route;
 |ItemCreateController
 */
 //Main
-Route::get(uri: '/', action: MainController::class)->name(name: 'main');
+Route::get('/', MainController::class)->name('main');
 
 //Item
-Route::prefix('/items')->group(function () {
-    Route::get(uri: '/', action: ItemListController::class)->name(name: 'items.list');
-    Route::get(uri: '/{id}', action: ShowItemController::class)->name(name: 'items.show');
-    Route::get(uri: '/create', action: ItemCreateController::class)->name(name: 'items.create');
-    Route::post(uri: '/', action: ItemStoreController::class)->name(name: 'items.store');
-    Route::get(uri: '/{item}/edit', action: ItemEditController::class)->name(name: 'items.edit');
-    Route::put(uri: '/{item}', action: ItemUpdateController::class)->name(name: 'items.update');
-    Route::delete(uri: '/{item}', action: ItemDestroyController::class)->name(name: 'items.destroy');
-});
+Route::get('/items', ItemListController::class)->name('items.list');
+Route::get('/items/create', ItemCreateController::class)->name('items.create');
+Route::post('/items', ItemStoreController::class)->name('items.store');
+Route::get('/items/{item}/edit', ItemEditController::class )->name('items.edit');
+Route::put('/items/{item}', ItemUpdateController::class)->name('items.update');
+Route::delete('/items/{item}', ItemDestroyController::class)->name('items.destroy');
+Route::get('/items/{id}', ShowItemController::class)->name('items.show');
 
 //request
-Route::prefix('/requests')->group(function () {
-    Route::get(uri: '/', action: RequestController::class)->name(name: 'requests.list');
-    Route::get(uri: '/{id}', action: ShowRequestController::class)->name(name: 'requests.show');
-    Route::post(uri: '/', action: RequestStoreController::class)->name(name: 'requests.store');
-    Route::get(uri: '/{request}/edit', action: RequestEditController::class)->name(name: 'requests.edit');
-    Route::put(uri: '/{request}', action: RequestUpdateController::class)->name(name: 'requests.update');
-    Route::delete(uri: '/{request}', action: RequestDestroyController::class)->name(name: 'requests.destroy');
-});
+Route::post('/requests', RequestStoreController::class)->name('requests.store');
+Route::get('/requests', RequestStoreController::class)->name('requests.show');
+Route::get('/requests/{request}/edit', RequestEditController::class)->name('requests.edit');
+Route::put('/requests/{request}', RequestUpdateController::class)->name('requests.update');
+Route::get('/requests', RequestController::class)->name('requests.list');
+Route::get('/requests/{id}', ShowRequestController::class)->name('requests.show');
+Route::delete('/request/{request}',RequestDestroyController::class)->name('requests.destroy');
